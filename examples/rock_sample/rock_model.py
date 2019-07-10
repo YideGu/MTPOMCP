@@ -106,7 +106,9 @@ class RockModel(Model):
         self.n_cols = int(dimensions[1])
 
         self.initialize()
-
+    # 
+    # 
+    # 
     # initialize the maps of the grid
     def initialize(self):
         p = GridPosition()
@@ -422,8 +424,8 @@ class RockModel(Model):
             return -self.illegal_move_penalty
 
         if self.is_terminal(next_state):
-            if self.sample_number < (self.n_rocks - self.actual_rock_states.count(0)):
-                return -self.exit_reward
+            # if self.sample_number < (self.n_rocks - self.actual_rock_states.count(0)):
+            #     return -self.exit_reward
             return self.exit_reward
 
         if action.bin_number is ActionType.SAMPLE:
