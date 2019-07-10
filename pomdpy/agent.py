@@ -2,6 +2,7 @@ from __future__ import print_function, division
 import time
 import logging
 import os
+from examples.rock_sample.rock_state import RockState
 from pomdpy.pomdp import Statistic
 from pomdpy.pomdp.history import Histories, HistoryEntry
 from pomdpy.util import console, print_divider
@@ -155,6 +156,10 @@ class Agent:
 
         # Monte-Carlo start state
         state = solver.belief_tree_index.sample_particle()
+
+
+        state = RockState(self.model.start_position, [0,0,1,1,1,0,1,1])
+        console(2, module, "Actual rock states = " + str([0,0,1,1,1,0,1,1]))
 
         reward = 0
         discounted_reward = 0

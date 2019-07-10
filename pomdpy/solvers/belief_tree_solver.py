@@ -3,6 +3,7 @@ from builtins import range
 import time
 import random
 import abc
+import numpy as np
 from pomdpy.util import console
 from pomdpy.pomdp.belief_tree import BeliefTree
 from pomdpy.solvers import Solver
@@ -33,11 +34,21 @@ class BeliefTreeSolver(Solver):
 
         # generate state particles for root node belief state estimation
         # This is for simulation
+        rock_states_accumulate = [0.,0.,0.,0.,0.,0.,0.,0.]
         for i in range(self.model.n_start_states):
             particle = self.model.sample_an_init_state()
+
+            rock_states_accumulate  = np.add(rock_states_accumulate, particle.rock_states)
+
             self.belief_tree.root.state_particles.append(particle)
 
+        print(np.divide(rock_states_accumulate,[1,2,4,8,16,32,64,128]))
+
+        
+
         self.belief_tree_index = self.belief_tree.root.copy()
+
+
 
     def monte_carlo_approx(self, eps, start_time):
         """
